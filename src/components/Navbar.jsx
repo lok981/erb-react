@@ -3,8 +3,13 @@ import logo from "../assets/favicon.ico";
 import { pageLink } from "../../data.js";
 import PageLinks from "../components/PageLinks";
 import SocialLinks from "../components/SocialLinks";
+import { useState } from "react";
 
 const Navbar = () => {
+    const [isToggled, setToggle] = useState(false);
+    const handleToggle = () => {
+        setToggle(!isToggled);
+    };
     return (
         <div className="navbar">
             <div className="container navbar-flex">
@@ -20,10 +25,10 @@ const Navbar = () => {
                     <SocialLinks />
                 </ul>
                 <div className="mobile-menu">
-                    <div className="mobile-menu-toggle">
+                    <div className="mobile-menu-toggle" onClick={handleToggle}>
                         <i className="fa-solid fa-bars"></i>
                     </div>
-                    <div className="mobile-menu-items">
+                    <div className={`mobile-menu-items ${isToggled ? "active" : ""}`}>
                         <ul className="mobile-menu-list">
                             {pageLink.map((item) => {
                                 return <PageLinks {...item} key={item.id} />;
